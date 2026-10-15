@@ -87,4 +87,16 @@ public class Empresa {
         }
         return agregado;
     }
+    // verificar cliente
+    public boolean verificarCliente(String documento) {
+        boolean existe = false;
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getDocumento().equals(documento)) {
+                existe = true;
+                break;
+            }
+        }
+        return existe;
+    }
+
 }

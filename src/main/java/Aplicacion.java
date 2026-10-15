@@ -69,6 +69,7 @@ public class Aplicacion {
                     break;
                 case 2:
 
+
                 case 0:
                     System.out.println("Saliendo...");
 
