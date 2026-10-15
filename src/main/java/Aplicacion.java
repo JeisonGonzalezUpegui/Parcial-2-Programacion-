@@ -378,7 +378,47 @@ public class Aplicacion {
 
                     break;
                 }
+                case 7: {
+                    System.out.println("---Prendas Agotadas---");
 
+                    ArrayList<Inventario> agotadas = empresa.consultarPrendasAgotadas();
+
+                    if (agotadas.isEmpty()) {
+                        System.out.println("No hay prendas agotadas");
+                    } else {
+                        for (Inventario inventario : agotadas) {
+                            System.out.println("Sucursal: " + inventario.getSucursal().getNombre());
+                            System.out.println(inventario);
+                            System.out.println("-----------------------------");
+                        }
+                    }
+
+                    break;
+                }
+                case 8: {
+                    System.out.println("---Ventas de un vendedor---");
+
+                    System.out.println("Documento del vendedor:");
+                    String documentoVendedor = sc.nextLine();
+
+                    Vendedor vendedorConsulta = empresa.buscarVendedor(documentoVendedor);
+
+                    if (vendedorConsulta == null) {
+                        System.out.println("El vendedor no existe");
+                        break;
+                    }
+
+                    if (vendedorConsulta.consultarVentas().isEmpty()) {
+                        System.out.println("El vendedor no tiene ventas");
+                    } else {
+                        for (Venta v : vendedorConsulta.consultarVentas()) {
+                            System.out.println(v);
+                            System.out.println("-----------------------------");
+                        }
+                    }
+
+                    break;
+                }
                 case 0:
                     System.out.println("Saliendo...");
 
