@@ -60,9 +60,25 @@ public class Prenda {
     public ArrayList<Inventario> getListaInventarios() {
         return listaInventarios;
     }
+    @Override
+    public String toString() {
+        return "Prenda: " + nombre
+                + "\nCodigo: " + codigo
+                + "\nMarca: " + marca
+                + "\nPrecio base: " + precioBase
+                + "\nCategoria: " + categoria;
+    }
 
     //precio base + recargo de la categoria
     public double calcularPrecioConRecargo() {
         return precioBase + (precioBase * categoria.getRecargo());
+    }
+    //total de unidades vendidas de la prenda en todas las sucursales
+    public int calcularUnidadesVendidas() {
+        int total = 0;
+        for (Inventario inventario : listaInventarios) {
+            total = total + inventario.unidadesVendidas();
+        }
+        return total;
     }
 }

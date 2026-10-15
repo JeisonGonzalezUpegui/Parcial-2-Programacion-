@@ -48,6 +48,14 @@ public class Inventario {
     public Sucursal getSucursal() {
         return sucursal;
     }
+    @Override
+    public String toString() {
+        return "Prenda: " + prenda.getNombre()
+                + "\nCodigo: " + prenda.getCodigo()
+                + "\nTalla: " + talla
+                + "\nColor: " + color
+                + "\nCantidad disponible: " + cantidad;
+    }
 
     //verificar que alcance la cantidad pedida
     public boolean hayExistencias(int cantidadSolicitada) {

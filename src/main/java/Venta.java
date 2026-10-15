@@ -64,6 +64,15 @@ public class Venta {
     public ArrayList<DetalleVenta> getListaDetalles() {
         return listaDetalles;
     }
+    @Override
+    public String toString() {
+        return "Venta: " + codigo
+                + "\nFecha: " + fecha
+                + "\nCliente: " + cliente.getNombreCompleto()
+                + "\nVendedor: " + vendedor.getNombreCompleto()
+                + "\nSucursal: " + sucursal.getNombre()
+                + "\nTotal: " + calcularTotal();
+    }
 
     //agregar un detalle a la venta
     public DetalleVenta agregarDetalle(Inventario inventario, int cantidad) {

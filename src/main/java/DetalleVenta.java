@@ -32,6 +32,15 @@ public class DetalleVenta {
         return subtotal;
     }
 
+    @Override
+    public String toString() {
+        return "Prenda: " + inventario.getPrenda().getNombre()
+                + "\nTalla: " + inventario.getTalla()
+                + "\nColor: " + inventario.getColor()
+                + "\nCantidad: " + cantidad
+                + "\nPrecio unitario final: " + precioUnitarioFinal
+                + "\nSubtotal: " + subtotal;
+    }
     //precio con recargo menos el descuento del cliente
     public double calcularPrecioUnitarioFinal(Cliente cliente) {
         double precioConRecargo = inventario.getPrenda().calcularPrecioConRecargo();

@@ -141,4 +141,30 @@ public class Sucursal {
         }
         return total;
     }
+    // buscar vendedor por documento
+    public Vendedor buscarVendedor(String documento) {
+        Vendedor vendedorEncontrado = null;
+
+        for (Vendedor vendedor : listaVendedores) {
+            if (vendedor.getDocumento().equals(documento)) {
+                vendedorEncontrado = vendedor;
+                break;
+            }
+        }
+
+        return vendedorEncontrado;
+    }
+
+    // inventarios disponibles de una prenda
+    public List<Inventario> consultarDisponiblesPorPrenda(String codigoPrenda) {
+        List<Inventario> resultado = new ArrayList<>();
+
+        for (Inventario inventario : consultarPrendasDisponibles()) {
+            if (inventario.getPrenda().getCodigo().equals(codigoPrenda)) {
+                resultado.add(inventario);
+            }
+        }
+
+        return resultado;
+    }
 }

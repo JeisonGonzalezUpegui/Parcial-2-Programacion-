@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 import java.time.LocalDate;
 
 public class Aplicacion {
@@ -19,7 +20,7 @@ public class Aplicacion {
             System.out.println("2. Agregar Cliente");
             System.out.println("3. Agregar Vendedor");
 
-            System.out.println("---Prenda---");
+            System.out.println("---Inventario---");
             System.out.println("4. Agregar Prenda a una sucursal");
             System.out.println("5. Buscar prenda en una sucursal");
 
@@ -32,6 +33,7 @@ public class Aplicacion {
             System.out.println("9. Compras de un cliente");
             System.out.println("10. Ingresos totales de una sucursal");
             System.out.println("11. Prenda mas vendida en la empresa");
+            System.out.println("12. Prendas disponibles de una sucursal");
 
             System.out.println("0. Salir");
 
@@ -189,31 +191,18 @@ public class Aplicacion {
                     System.out.println("Codigo de la sucursal:");
                     String codigoSucursal = sc.nextLine();
 
-                    Sucursal sucursalSeleccionada =
-                            empresa.buscarSucursal(codigoSucursal);
+                    Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursal);
 
                     if (sucursalSeleccionada == null) {
                         System.out.println("La sucursal no existe");
                         break;
                     }
 
-                    System.out.println("Talla: 1.XS 2.S 3.M 4.L 5.XL");
+                    System.out.println("Talla (ropa: 1.XS 2.S 3.M 4.L 5.XL / calzado: numero de 35 a 44):");
                     int opcionTalla = sc.nextInt();
                     sc.nextLine();
 
-                    Talla talla = null;
-
-                    if (opcionTalla == 1) {
-                        talla = Talla.XS;
-                    } else if (opcionTalla == 2) {
-                        talla = Talla.S;
-                    } else if (opcionTalla == 3) {
-                        talla = Talla.M;
-                    } else if (opcionTalla == 4) {
-                        talla = Talla.L;
-                    } else if (opcionTalla == 5) {
-                        talla = Talla.XL;
-                    }
+                    Talla talla = empresa.obtenerTalla(prendaSeleccionada, opcionTalla);
 
                     if (talla == null) {
                         System.out.println("Talla invalida");
@@ -240,13 +229,155 @@ public class Aplicacion {
 
                     break;
                 }
-                case 0:
-                    System.out.println("Saliendo...");
+                case 5:{
+                    System.out.println("---Buscar Prenda en una sucursal---");
+
+                    System.out.println("Codigo de la prenda:");
+                    String codigoPrenda = sc.nextLine();
+
+                    Prenda prendaSeleccionada = empresa.buscarPrenda(codigoPrenda);
+
+                    if (prendaSeleccionada == null) {
+                        System.out.println("La prenda no existe en el catalogo");
+                        break;
+                    }
+
+                    System.out.println("Codigo de la sucursal:");
+                    String codigoSucursal = sc.nextLine();
+
+                    Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursal);
+
+                    if (sucursalSeleccionada == null) {
+                        System.out.println("La sucursal no existe");
+                        break;
+                    }
+
+                    List<Inventario> disponibles = sucursalSeleccionada.consultarDisponiblesPorPrenda(codigoPrenda);
+
+                    if (disponibles.isEmpty()) {
+                        System.out.println("No hay existencias disponibles de esta prenda en la sucursal");
+                    } else {
+                        for (Inventario inventario : disponibles) {
+                            System.out.println(inventario);
+                            System.out.println("-----------------------------");
+                        }
+                    }
+                    break;
+                }
+                case 6: {
+                    System.out.println("---Registrar Venta---");
+
+                    System.out.println("Codigo de la sucursal:");
+                    String codigoSucursal = sc.nextLine();
+
+                    Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursal);
+
+                    if (sucursalSeleccionada == null) {
+                        System.out.println("La sucursal no existe");
+                        break;
+                    }
+
+                    System.out.println("Documento del cliente:");
+                    String documentoCliente = sc.nextLine();
+
+                    Cliente clienteVenta = empresa.buscarCliente(documentoCliente);
+
+                    if (clienteVenta == null) {
+                        System.out.println("El cliente no existe");
+                        break;
+                    }
+
+                    System.out.println("Documento del vendedor:");
+                    String documentoVendedor = sc.nextLine();
+
+                    Vendedor vendedorVenta = sucursalSeleccionada.buscarVendedor(documentoVendedor);
+
+                    if (vendedorVenta == null) {
+                        System.out.println("El vendedor no existe en esta sucursal");
+                        break;
+                    }
+
+                    System.out.println("Codigo de la venta:");
+                    String codigoVenta = sc.nextLine();
+
+                    Venta venta = new Venta(codigoVenta, LocalDate.now());
+                    venta.setCliente(clienteVenta);
+                    venta.setVendedor(vendedorVenta);
+                    venta.setSucursal(sucursalSeleccionada);
+
+                    int agregarOtra;
+                    do {
+                        System.out.println("Codigo de la prenda:");
+                        String codigoPrenda = sc.nextLine();
+
+                        Prenda prendaVenta = empresa.buscarPrenda(codigoPrenda);
+
+                        if (prendaVenta == null) {
+                            System.out.println("La prenda no existe en el catalogo");
+                        } else {
+                            System.out.println("Talla (ropa: 1.XS 2.S 3.M 4.L 5.XL / calzado: numero de 35 a 44):");
+                            int opcionTallaVenta = sc.nextInt();
+                            sc.nextLine();
+
+                            Talla tallaVenta = empresa.obtenerTalla(prendaVenta, opcionTallaVenta);
+
+                            if (tallaVenta == null) {
+                                System.out.println("Talla invalida");
+                            } else {
+                                System.out.println("Color:");
+                                String colorVenta = sc.nextLine();
+
+                                Inventario inventarioVenta = sucursalSeleccionada.buscarInventario(prendaVenta, tallaVenta, colorVenta);
+
+                                if (inventarioVenta == null) {
+                                    System.out.println("No existe ese inventario en la sucursal");
+                                } else {
+                                    System.out.println("Cantidad:");
+                                    int cantidadVenta = sc.nextInt();
+                                    sc.nextLine();
+
+                                    if (venta.agregarDetalle(inventarioVenta, cantidadVenta) == null) {
+                                        System.out.println("Cantidad invalida");
+                                    } else {
+                                        System.out.println("Prenda agregada a la venta");
+                                    }
+                                }
+                            }
+                        }
+
+                        System.out.println("Agregar otra prenda? 1.Si 2.No");
+                        agregarOtra = sc.nextInt();
+                        sc.nextLine();
+                    } while (agregarOtra == 1);
+
+                    if (venta.getListaDetalles().isEmpty()) {
+                        System.out.println("No se agregaron prendas, la venta se cancelo");
+                        break;
+                    }
+
+                    System.out.println("---Resumen de la venta---");
+                    for (DetalleVenta detalle : venta.getListaDetalles()) {
+                        System.out.println(detalle);
+                        System.out.println("-----------------------------");
+                    }
+                    System.out.println("Total de la venta: " + venta.calcularTotal());
+
+                    System.out.println("Confirmar venta? 1.Si 2.No");
+                    int confirmar = sc.nextInt();
+                    sc.nextLine();
+
+                    if (confirmar == 1) {
+                        if (venta.confirmar()) {
+                            System.out.println("Venta registrada exitosamente");
+                        } else {
+                            System.out.println("No se pudo confirmar la venta. No hay existencias suficientes");
+                        }
+                    } else {
+                        System.out.println("Venta cancelada");
+                    }
 
                     break;
-                default:
-                    System.out.println("Opcion invalida");
-                    break;
+                }
             }
         } while (opcion != 0) ;
     }

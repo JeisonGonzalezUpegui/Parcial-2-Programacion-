@@ -170,4 +170,84 @@ public class Empresa {
 
         return prendaEncontrada;
     }
+    // buscar cliente por documento
+    public Cliente buscarCliente(String documento) {
+        Cliente clienteEncontrado = null;
+
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getDocumento().equals(documento)) {
+                clienteEncontrado = cliente;
+                break;
+            }
+        }
+
+        return clienteEncontrado;
+    }
+
+    // buscar vendedor por documento en todas las sucursales
+    public Vendedor buscarVendedor(String documento) {
+        Vendedor vendedorEncontrado = null;
+
+        for (Sucursal sucursal : listaSucursales) {
+            Vendedor vendedor = sucursal.buscarVendedor(documento);
+            if (vendedor != null) {
+                vendedorEncontrado = vendedor;
+                break;
+            }
+        }
+
+        return vendedorEncontrado;
+    }
+
+    // obtener la talla segun la categoria de la prenda (calzado usa numeros 35 a 44, el resto 1 a 5 = XS a XL)
+    public Talla obtenerTalla(Prenda prenda, int opcion) {
+        Talla talla = null;
+
+        if (prenda.getCategoria() == CategoriaPrenda.CALZADO) {
+            if (opcion >= 35 && opcion <= 44) {
+                talla = Talla.valueOf("T" + opcion);
+            }
+        } else {
+            if (opcion == 1) {
+                talla = Talla.XS;
+            } else if (opcion == 2) {
+                talla = Talla.S;
+            } else if (opcion == 3) {
+                talla = Talla.M;
+            } else if (opcion == 4) {
+                talla = Talla.L;
+            } else if (opcion == 5) {
+                talla = Talla.XL;
+            }
+        }
+
+        return talla;
+    }
+
+    // prendas agotadas de todas las sucursales
+    public ArrayList<Inventario> consultarPrendasAgotadas() {
+        ArrayList<Inventario> agotadas = new ArrayList<>();
+
+        for (Sucursal sucursal : listaSucursales) {
+            agotadas.addAll(sucursal.consultarPrendasAgotadas());
+        }
+
+        return agotadas;
+    }
+
+    // prenda con mas unidades vendidas en toda la empresa
+    public Prenda prendaMasVendida() {
+        Prenda masVendida = null;
+        int maxUnidades = 0;
+
+        for (Prenda prenda : listaPrendas) {
+            int unidades = prenda.calcularUnidadesVendidas();
+            if (unidades > maxUnidades) {
+                maxUnidades = unidades;
+                masVendida = prenda;
+            }
+        }
+
+        return masVendida;
+    }
 }
