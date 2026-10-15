@@ -99,4 +99,15 @@ public class Empresa {
         return existe;
     }
 
+//agregar cliente
+public boolean agregarCliente(Cliente cliente) {
+    boolean agregado = false;
+    boolean existe = verificarPrenda(cliente.getDocumento());
+    if (existe == false) {
+        listaClientes.add(cliente);
+        agregado = true;
+    }
+    return agregado;
+}
+
 }
