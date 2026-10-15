@@ -7,6 +7,7 @@ public class Aplicacion {
         Scanner sc = new Scanner(System.in);
         Empresa empresa = new Empresa("ModaStyle", "676767", "calle 19 manzana 10", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         Sucursal sucursal= new Sucursal("Centro","6776","calle 20 mazana 30","Armenia",new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+        empresa.getListaSucursales().add(sucursal);
         int opcion;
         do {
             System.out.println("=====Menú Empresa=====");
@@ -88,7 +89,7 @@ public class Aplicacion {
                     System.out.println("Codigo de afiliacion: ");
                     String codigoAfiliacion=sc.nextLine();
 
-                    System.out.println("Categoria: 1.Camiseta 2.Pantalon 3.Vestido 4.Chaqueta 5.Calzado");
+                    System.out.println("Categoria: 1.bronce, 2.plata, 3.oro");
                     int opcionCategoriaCliente = sc.nextInt();
                     sc.nextLine();
 
@@ -114,42 +115,61 @@ public class Aplicacion {
                     }
                     break;
 
-                case 3:
-                    System.out.println("---Agregar Vendedor");
+                case 3: {
+                    System.out.println("---Agregar Vendedor---");
 
-                    System.out.println("Documento: ");
+                    System.out.println("Codigo de la sucursal:");
+                    String codigoSucursal = sc.nextLine();
+
+                    Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursal);
+
+                    if (sucursalSeleccionada == null) {
+                        System.out.println("La sucursal no existe");
+                        break;
+                    }
+
+                    System.out.println("Documento:");
                     String documentoVendedor = sc.nextLine();
 
-                    System.out.println("Nombre completo: ");
-                    String nombreCompletoVendedor=sc.nextLine();
+                    System.out.println("Nombre completo:");
+                    String nombreCompletoVendedor = sc.nextLine();
 
-                    System.out.println("Correo:" );
-                    String correoVendedor=sc.nextLine();
+                    System.out.println("Correo:");
+                    String correoVendedor = sc.nextLine();
 
-                    System.out.println("Telefono: ");
-                    String telefonoVendedor=sc.nextLine();
+                    System.out.println("Telefono:");
+                    String telefonoVendedor = sc.nextLine();
 
-                    System.out.println("Codigo de empleado: ");
-                    String codigoEmpleado=sc.nextLine();
+                    System.out.println("Codigo de empleado:");
+                    String codigoEmpleado = sc.nextLine();
 
-                    System.out.println("Fecha de contratacion: ");
+                    System.out.println("Fecha de contratacion (AAAA-MM-DD):");
                     String fecha = sc.nextLine();
                     LocalDate fechaContratacion = LocalDate.parse(fecha);
 
-                    System.out.println("Salario basico: ");
-                    double salarioBasico=sc.nextDouble();
+                    System.out.println("Salario basico:");
+                    double salarioBasico = sc.nextDouble();
                     sc.nextLine();
 
-                    Vendedor vendedor= new Vendedor(documentoVendedor ,nombreCompletoVendedor, correoVendedor, telefonoVendedor, codigoEmpleado, fechaContratacion, salarioBasico,new ArrayList<>()
+                    Vendedor vendedor = new Vendedor(
+                            documentoVendedor,
+                            nombreCompletoVendedor,
+                            correoVendedor,
+                            telefonoVendedor,
+                            codigoEmpleado,
+                            fechaContratacion,
+                            salarioBasico,
+                            new ArrayList<>()
                     );
-                    if (empresa.agregarVendedor(sucursal,vendedor)) {
+
+                    if (empresa.agregarVendedor(sucursalSeleccionada, vendedor)) {
                         System.out.println("El vendedor se agrego exitosamente");
                     } else {
-                        System.out.println("El vendedor ya existe");
+                        System.out.println("El documento ya existe");
                     }
+
                     break;
-
-
+                }
                 case 0:
                     System.out.println("Saliendo...");
 

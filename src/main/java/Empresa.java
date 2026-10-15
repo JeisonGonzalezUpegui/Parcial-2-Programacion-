@@ -101,16 +101,18 @@ public class Empresa {
         }
 
         // Verificar en los vendedores de cada sucursal
-        for (Sucursal sucursal : listaSucursales) {
-            for (Vendedor vendedor : sucursal.getListaVendedores()) {
-                if (vendedor.getDocumento().equals(documento)) {
-                    existe = true;
+        if (existe == false) {
+            for (Sucursal sucursal : listaSucursales) {
+                for (Vendedor vendedor : sucursal.getListaVendedores()) {
+                    if (vendedor.getDocumento().equals(documento)) {
+                        existe = true;
+                        break;
+                    }
+                }
+
+                if (existe == true) {
                     break;
                 }
-            }
-
-            if (existe == true) {
-                break;
             }
         }
 
@@ -128,13 +130,28 @@ public class Empresa {
 
         return agregado;
     }
+    // buscar sucursal
+    public Sucursal buscarSucursal(String codigo) {
+        Sucursal sucursalEncontrada = null;
+
+        for (Sucursal sucursal : listaSucursales) {
+            if (sucursal.getCodigo().equals(codigo)) {
+                sucursalEncontrada = sucursal;
+                break;
+            }
+        }
+
+        return sucursalEncontrada;
+    }
     // agregar vendedor
     public boolean agregarVendedor(Sucursal sucursal, Vendedor vendedor) {
         boolean agregado = false;
         boolean existe = verificarDocumento(vendedor.getDocumento());
 
-        if (existe == false) {
-            sucursal.getListaVendedores().add(vendedor);
+        Sucursal sucursalEncontrada = buscarSucursal(sucursal.getCodigo());
+
+        if (existe == false && sucursalEncontrada != null) {
+            sucursalEncontrada.getListaVendedores().add(vendedor);
             agregado = true;
         }
 
