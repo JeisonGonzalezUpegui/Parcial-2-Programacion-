@@ -46,4 +46,14 @@ public class Vendedor extends Persona{
     public void setListaVentas(ArrayList<Venta> listaVentas) {
         this.listaVentas = listaVentas;
     }
+
+    @Override
+    public String toString() {
+        return "Vendedor{" +
+                "codigoEmpleado='" + codigoEmpleado + '\'' +
+                ", fechaContratacion=" + fechaContratacion +
+                ", salarioBasico=" + salarioBasico +
+                ", listaVentas=" + listaVentas +
+                '}';
+    }
 }

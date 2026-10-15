@@ -1,10 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+
 public class Aplicacion {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Empresa empresa = new Empresa("ModaStyle", "676767", "calle 19 manzana 10", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-
+        Sucursal sucursal= new Sucursal("Centro","6776","calle 20 mazana 30","Armenia",new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         int opcion;
         do {
             System.out.println("=====Menú Empresa=====");
@@ -26,6 +28,7 @@ public class Aplicacion {
             switch (opcion) {
                 case 1:
                     System.out.println("---Agregar Prenda---");
+
                     System.out.println("Nombre: ");
                     String nombre = sc.nextLine();
 
@@ -68,6 +71,83 @@ public class Aplicacion {
                     }
                     break;
                 case 2:
+                    System.out.println("---Agregar Cliente");
+
+                    System.out.println("Documento: ");
+                    String documento = sc.nextLine();
+
+                    System.out.println("Nombre completo: ");
+                    String nombreCompleto=sc.nextLine();
+
+                    System.out.println("Correo:" );
+                    String correo=sc.nextLine();
+
+                    System.out.println("Telefono: ");
+                    String telefono=sc.nextLine();
+
+                    System.out.println("Codigo de afiliacion: ");
+                    String codigoAfiliacion=sc.nextLine();
+
+                    System.out.println("Categoria: 1.Camiseta 2.Pantalon 3.Vestido 4.Chaqueta 5.Calzado");
+                    int opcionCategoriaCliente = sc.nextInt();
+                    sc.nextLine();
+
+                    CategoriaCliente categoriaCliente = null;
+                    if (opcionCategoriaCliente == 1) {
+                        categoriaCliente = CategoriaCliente.BRONCE;
+                    } else if (opcionCategoriaCliente == 2) {
+                        categoriaCliente = CategoriaCliente.PLATA;
+                    } else if (opcionCategoriaCliente == 3) {
+                        categoriaCliente = CategoriaCliente.ORO;
+                    }
+                    if (categoriaCliente == null) {
+                        System.out.println("Categoria invalida");
+                        break;
+                    }
+
+                    Cliente cliente= new Cliente(documento, nombreCompleto, correo, telefono, codigoAfiliacion, categoriaCliente,new ArrayList<>()
+                    );
+                    if (empresa.agregarCliente(cliente)) {
+                        System.out.println("El cliente se agrego exitosamente");
+                    } else {
+                        System.out.println("El cliente ya existe");
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("---Agregar Vendedor");
+
+                    System.out.println("Documento: ");
+                    String documentoVendedor = sc.nextLine();
+
+                    System.out.println("Nombre completo: ");
+                    String nombreCompletoVendedor=sc.nextLine();
+
+                    System.out.println("Correo:" );
+                    String correoVendedor=sc.nextLine();
+
+                    System.out.println("Telefono: ");
+                    String telefonoVendedor=sc.nextLine();
+
+                    System.out.println("Codigo de empleado: ");
+                    String codigoEmpleado=sc.nextLine();
+
+                    System.out.println("Fecha de contratacion: ");
+                    String fecha = sc.nextLine();
+                    LocalDate fechaContratacion = LocalDate.parse(fecha);
+
+                    System.out.println("Salario basico: ");
+                    double salarioBasico=sc.nextDouble();
+                    sc.nextLine();
+
+                    Vendedor vendedor= new Vendedor(documentoVendedor ,nombreCompletoVendedor, correoVendedor, telefonoVendedor, codigoEmpleado, fechaContratacion, salarioBasico,new ArrayList<>()
+                    );
+                    if (empresa.agregarVendedor(sucursal,vendedor)) {
+                        System.out.println("El vendedor se agrego exitosamente");
+                    } else {
+                        System.out.println("El vendedor ya existe");
+                    }
+                    break;
 
 
                 case 0:

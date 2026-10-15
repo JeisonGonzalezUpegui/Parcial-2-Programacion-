@@ -87,27 +87,57 @@ public class Empresa {
         }
         return agregado;
     }
-    // verificar cliente
-    public boolean verificarCliente(String documento) {
+
+    // verificar documento
+    public boolean verificarDocumento(String documento) {
         boolean existe = false;
+
+        // Verificar en la lista de clientes
         for (Cliente cliente : listaClientes) {
             if (cliente.getDocumento().equals(documento)) {
                 existe = true;
                 break;
             }
         }
+
+        // Verificar en los vendedores de cada sucursal
+        for (Sucursal sucursal : listaSucursales) {
+            for (Vendedor vendedor : sucursal.getListaVendedores()) {
+                if (vendedor.getDocumento().equals(documento)) {
+                    existe = true;
+                    break;
+                }
+            }
+
+            if (existe == true) {
+                break;
+            }
+        }
+
         return existe;
     }
+    // agregar cliente
+    public boolean agregarCliente(Cliente cliente) {
+        boolean agregado = false;
+        boolean existe = verificarDocumento(cliente.getDocumento());
 
-//agregar cliente
-public boolean agregarCliente(Cliente cliente) {
-    boolean agregado = false;
-    boolean existe = verificarPrenda(cliente.getDocumento());
-    if (existe == false) {
-        listaClientes.add(cliente);
-        agregado = true;
+        if (existe == false) {
+            listaClientes.add(cliente);
+            agregado = true;
+        }
+
+        return agregado;
     }
-    return agregado;
-}
+    // agregar vendedor
+    public boolean agregarVendedor(Sucursal sucursal, Vendedor vendedor) {
+        boolean agregado = false;
+        boolean existe = verificarDocumento(vendedor.getDocumento());
 
+        if (existe == false) {
+            sucursal.getListaVendedores().add(vendedor);
+            agregado = true;
+        }
+
+        return agregado;
+    }
 }
