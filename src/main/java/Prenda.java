@@ -64,4 +64,16 @@ public class Prenda {
     public void setListaInventarios(ArrayList<Inventario> listaInventarios) {
         this.listaInventarios = listaInventarios;
     }
+
+    @Override
+    public String toString() {
+        return "Prenda{" +
+                "nombre='" + nombre + '\'' +
+                ", codigo='" + codigo + '\'' +
+                ", marca='" + marca + '\'' +
+                ", precioBase=" + precioBase +
+                ", categoriaPrenda=" + categoriaPrenda +
+                ", listaInventarios=" + listaInventarios +
+                '}';
+    }
 }

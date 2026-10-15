@@ -66,7 +66,7 @@ public class Empresa {
     }
 
     // verificar Prenda
-    public boolean verificarProducto(String codigo) {
+    public boolean verificarPrenda(String codigo) {
         boolean existe = false;
         for (Prenda prenda : listaPrendas) {
             if (prenda.getCodigo().equals(codigo)) {
@@ -78,9 +78,9 @@ public class Empresa {
     }
 
     // agregar Prenda
-    public boolean agregarProducto(Prenda prenda) {
+    public boolean agregarPrenda(Prenda prenda) {
         boolean agregado = false;
-        boolean existe = verificarProducto(prenda.getCodigo());
+        boolean existe = verificarPrenda(prenda.getCodigo());
         if (existe == false) {
             listaPrendas.add(prenda);
             agregado = true;
