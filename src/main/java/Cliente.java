@@ -1,4 +1,8 @@
-package PACKAGE_NAME;
+import java.util.ArrayList;
 
-public class Cliente {
+public class Cliente extends Persona{
+    private String codigoAfiliacion;
+    private CategoriaCliente categoriaCliente;
+    private ArrayList<Venta> listaVentas;
+
 }
