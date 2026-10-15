@@ -378,6 +378,14 @@ public class Aplicacion {
 
                     break;
                 }
+
+                case 0:
+                    System.out.println("Saliendo...");
+
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
+                    break;
             }
         } while (opcion != 0) ;
     }
