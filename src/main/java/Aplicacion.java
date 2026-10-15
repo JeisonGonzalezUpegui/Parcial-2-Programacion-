@@ -419,6 +419,85 @@ public class Aplicacion {
 
                     break;
                 }
+                case 9: {
+                    System.out.println("---Compras de un cliente---");
+
+                    System.out.println("Documento del cliente:");
+                    String documentoCliente = sc.nextLine();
+
+                    Cliente clienteConsulta = empresa.buscarCliente(documentoCliente);
+
+                    if (clienteConsulta == null) {
+                        System.out.println("El cliente no existe");
+                        break;
+                    }
+
+                    if (clienteConsulta.consultarCompras().isEmpty()) {
+                        System.out.println("El cliente no tiene compras");
+                    } else {
+                        for (Venta v : clienteConsulta.consultarCompras()) {
+                            System.out.println(v);
+                            System.out.println("-----------------------------");
+                        }
+                    }
+
+                    break;
+                }
+                case 10: {
+                    System.out.println("---Ingresos totales de una sucursal---");
+
+                    System.out.println("Codigo de la sucursal:");
+                    String codigoSucursal = sc.nextLine();
+
+                    Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursal);
+
+                    if (sucursalSeleccionada == null) {
+                        System.out.println("La sucursal no existe");
+                        break;
+                    }
+
+                    System.out.println("Ingresos totales: " + sucursalSeleccionada.calcularIngresosTotales());
+
+                    break;
+                }
+                case 11: {
+                    System.out.println("---Prenda mas vendida en la empresa---");
+
+                    Prenda prendaMasVendida = empresa.prendaMasVendida();
+
+                    if (prendaMasVendida == null) {
+                        System.out.println("Aun no hay ventas registradas");
+                    } else {
+                        System.out.println(prendaMasVendida);
+                        System.out.println("Unidades vendidas: " + prendaMasVendida.calcularUnidadesVendidas());
+                    }
+
+                    break;
+                }
+                case 12: {
+                    System.out.println("---Prendas disponibles de una sucursal---");
+
+                    System.out.println("Codigo de la sucursal:");
+                    String codigoSucursal = sc.nextLine();
+
+                    Sucursal sucursalSeleccionada = empresa.buscarSucursal(codigoSucursal);
+
+                    if (sucursalSeleccionada == null) {
+                        System.out.println("La sucursal no existe");
+                        break;
+                    }
+
+                    if (sucursalSeleccionada.consultarPrendasDisponibles().isEmpty()) {
+                        System.out.println("No hay prendas disponibles en la sucursal");
+                    } else {
+                        for (Inventario inventario : sucursalSeleccionada.consultarPrendasDisponibles()) {
+                            System.out.println(inventario);
+                            System.out.println("-----------------------------");
+                        }
+                    }
+
+                    break;
+                }
                 case 0:
                     System.out.println("Saliendo...");
 
