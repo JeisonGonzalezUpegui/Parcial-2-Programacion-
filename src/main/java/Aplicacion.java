@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Aplicacion {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Empresa empresa = new Empresa("ModaStyle", "676767", "calle 19 manzana 10",new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+        Empresa empresa = new Empresa("ModaStyle", "676767", "calle 19 manzana 10", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         int opcion;
         do {
@@ -48,28 +48,29 @@ public class Aplicacion {
                     } else if (opcionCategoria == 4) {
                         categoriaPrenda = CategoriaPrenda.CHAQUETA;
                     } else if (opcionCategoria == 5) {
-                        categoriaPrenda= CategoriaPrenda.CALZADO;
-
+                        categoriaPrenda = CategoriaPrenda.CALZADO;
+                    }
                     if (categoriaPrenda == null) {
                         System.out.println("Categoria invalida");
                         break;
                     }
-                    Prenda prenda= new Prenda(nombre, codigo, marca, precioBase,categoriaPrenda,new ArrayList<>()
+                    Prenda prenda = new Prenda(nombre, codigo, marca, precioBase, categoriaPrenda, new ArrayList<>()
                     );
-                    if(empresa.agregarPrenda(prenda)) {
+                    if (empresa.agregarPrenda(prenda)) {
                         System.out.println("La prenda se agrego exitosamente");
-                    } else{
+                    } else {
                         System.out.println("La prenda ya existe");
                     }
 
                     break;
                 case 0:
+                    System.out.println("Saliendo...");
+
                     break;
                 default:
-
+                    System.out.println("Opcion invalida");
                     break;
             }
-        } while (opcion != 0);
-
+        } while (opcion != 0) ;
     }
 }
