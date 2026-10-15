@@ -8,4 +8,60 @@ public class Empresa {
     private ArrayList<Prenda> listaPrendas;
     private ArrayList<Cliente> listaClientes;
 
+    public Empresa(String nombre, String nit, String direccionPrincipal, ArrayList<Sucursal> listaSucursales, ArrayList<Prenda> listaPrendas, ArrayList<Cliente> listaClientes) {
+        this.nombre = nombre;
+        this.nit = nit;
+        this.direccionPrincipal = direccionPrincipal;
+        this.listaSucursales = listaSucursales;
+        this.listaPrendas = listaPrendas;
+        this.listaClientes = listaClientes;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNit() {
+        return nit;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public String getDireccionPrincipal() {
+        return direccionPrincipal;
+    }
+
+    public void setDireccionPrincipal(String direccionPrincipal) {
+        this.direccionPrincipal = direccionPrincipal;
+    }
+
+    public ArrayList<Sucursal> getListaSucursales() {
+        return listaSucursales;
+    }
+
+    public void setListaSucursales(ArrayList<Sucursal> listaSucursales) {
+        this.listaSucursales = listaSucursales;
+    }
+
+    public ArrayList<Prenda> getListaPrendas() {
+        return listaPrendas;
+    }
+
+    public void setListaPrendas(ArrayList<Prenda> listaPrendas) {
+        this.listaPrendas = listaPrendas;
+    }
+
+    public ArrayList<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+
+    public void setListaClientes(ArrayList<Cliente> listaClientes) {
+        this.listaClientes = listaClientes;
+    }
 }
