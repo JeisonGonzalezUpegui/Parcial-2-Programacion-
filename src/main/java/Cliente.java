@@ -34,4 +34,13 @@ public class Cliente extends Persona{
     public void setListaVentas(ArrayList<Venta> listaVentas) {
         this.listaVentas = listaVentas;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "codigoAfiliacion='" + codigoAfiliacion + '\'' +
+                ", categoriaCliente=" + categoriaCliente +
+                ", listaVentas=" + listaVentas +
+                '}';
+    }
 }

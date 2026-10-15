@@ -12,6 +12,11 @@ public class Aplicacion {
             System.out.println("---Prenda---");
             System.out.println("1. Agregar Prenda");
 
+            System.out.println("---Registro---");
+            System.out.println("2. Agregar Cliente");
+            System.out.println("3. Agregar Vendedor");
+
+            System.out.println();
             System.out.println("0. Salir");
 
             System.out.println("Seleccione la opcion: ");
@@ -61,8 +66,9 @@ public class Aplicacion {
                     } else {
                         System.out.println("La prenda ya existe");
                     }
-
                     break;
+                case 2:
+
                 case 0:
                     System.out.println("Saliendo...");
 
