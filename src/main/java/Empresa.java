@@ -64,4 +64,27 @@ public class Empresa {
     public void setListaClientes(ArrayList<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
     }
+
+    // verificar Prenda
+    public boolean verificarProducto(String codigo) {
+        boolean existe = false;
+        for (Prenda prenda : listaPrendas) {
+            if (prenda.getCodigo().equals(codigo)) {
+                existe = true;
+                break;
+            }
+        }
+        return existe;
+    }
+
+    // agregar Prenda
+    public boolean agregarProducto(Prenda prenda) {
+        boolean agregado = false;
+        boolean existe = verificarProducto(prenda.getCodigo());
+        if (existe == false) {
+            listaPrendas.add(prenda);
+            agregado = true;
+        }
+        return agregado;
+    }
 }
