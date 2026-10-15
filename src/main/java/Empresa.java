@@ -157,4 +157,17 @@ public class Empresa {
 
         return agregado;
     }
+    // buscar prenda por codigo
+    public Prenda buscarPrenda(String codigo) {
+        Prenda prendaEncontrada = null;
+
+        for (Prenda prenda : listaPrendas) {
+            if (prenda.getCodigo().equals(codigo)) {
+                prendaEncontrada = prenda;
+                break;
+            }
+        }
+
+        return prendaEncontrada;
+    }
 }

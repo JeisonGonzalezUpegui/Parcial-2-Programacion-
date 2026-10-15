@@ -5,16 +5,16 @@ public class Prenda {
     private String codigo;
     private String marca;
     private double precioBase;
-    private CategoriaPrenda categoriaPrenda;
+    private CategoriaPrenda categoria;
     private ArrayList<Inventario> listaInventarios;
 
-    public Prenda(String nombre, String codigo, String marca, double precioBase, CategoriaPrenda categoriaPrenda, ArrayList<Inventario> listaInventarios) {
+    public Prenda(String nombre, String codigo, String marca, double precioBase, CategoriaPrenda categoria) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.marca = marca;
         this.precioBase = precioBase;
-        this.categoriaPrenda = categoriaPrenda;
-        this.listaInventarios = listaInventarios;
+        this.categoria = categoria;
+        listaInventarios = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -49,31 +49,20 @@ public class Prenda {
         this.precioBase = precioBase;
     }
 
-    public CategoriaPrenda getCategoriaPrenda() {
-        return categoriaPrenda;
+    public CategoriaPrenda getCategoria() {
+        return categoria;
     }
 
-    public void setCategoriaPrenda(CategoriaPrenda categoriaPrenda) {
-        this.categoriaPrenda = categoriaPrenda;
+    public void setCategoria(CategoriaPrenda categoria) {
+        this.categoria = categoria;
     }
 
     public ArrayList<Inventario> getListaInventarios() {
         return listaInventarios;
     }
 
-    public void setListaInventarios(ArrayList<Inventario> listaInventarios) {
-        this.listaInventarios = listaInventarios;
-    }
-
-    @Override
-    public String toString() {
-        return "Prenda{" +
-                "nombre='" + nombre + '\'' +
-                ", codigo='" + codigo + '\'' +
-                ", marca='" + marca + '\'' +
-                ", precioBase=" + precioBase +
-                ", categoriaPrenda=" + categoriaPrenda +
-                ", listaInventarios=" + listaInventarios +
-                '}';
+    //precio base + recargo de la categoria
+    public double calcularPrecioConRecargo() {
+        return precioBase + (precioBase * categoria.getRecargo());
     }
 }

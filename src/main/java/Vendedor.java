@@ -1,18 +1,21 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Vendedor extends Persona{
+public class Vendedor extends Persona {
+
     private String codigoEmpleado;
     private LocalDate fechaContratacion;
     private double salarioBasico;
-    private ArrayList<Venta> listaVentas;
+    private List<Venta> ventas;
 
-    public Vendedor(String documento, String nombreCompleto, String correo, String telefono, String codigoEmpleado, LocalDate fechaContratacion, double salarioBasico, ArrayList<Venta> listaVentas) {
+    public Vendedor(String documento, String nombreCompleto, String correo, String telefono,
+                    String codigoEmpleado, LocalDate fechaContratacion, double salarioBasico) {
         super(documento, nombreCompleto, correo, telefono);
         this.codigoEmpleado = codigoEmpleado;
         this.fechaContratacion = fechaContratacion;
         this.salarioBasico = salarioBasico;
-        this.listaVentas = listaVentas;
+        this.ventas = new ArrayList<>();
     }
 
     public String getCodigoEmpleado() {
@@ -39,21 +42,7 @@ public class Vendedor extends Persona{
         this.salarioBasico = salarioBasico;
     }
 
-    public ArrayList<Venta> getListaVentas() {
-        return listaVentas;
-    }
-
-    public void setListaVentas(ArrayList<Venta> listaVentas) {
-        this.listaVentas = listaVentas;
-    }
-
-    @Override
-    public String toString() {
-        return "Vendedor{" +
-                "codigoEmpleado='" + codigoEmpleado + '\'' +
-                ", fechaContratacion=" + fechaContratacion +
-                ", salarioBasico=" + salarioBasico +
-                ", listaVentas=" + listaVentas +
-                '}';
+    public List<Venta> consultarVentas() {
+        return ventas;
     }
 }

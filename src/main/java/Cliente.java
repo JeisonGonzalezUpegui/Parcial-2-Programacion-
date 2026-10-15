@@ -1,15 +1,18 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente extends Persona {
+
     private String codigoAfiliacion;
     private CategoriaCliente categoriaCliente;
-    private ArrayList<Venta> listaVentas;
+    private List<Venta> compras;
 
-    public Cliente(String documento, String nombreCompleto, String correo, String telefono, String codigoAfiliacion, CategoriaCliente categoriaCliente, ArrayList<Venta> listaVentas) {
+    public Cliente(String documento, String nombreCompleto, String correo, String telefono,
+                   String codigoAfiliacion, CategoriaCliente categoria) {
         super(documento, nombreCompleto, correo, telefono);
         this.codigoAfiliacion = codigoAfiliacion;
-        this.categoriaCliente = categoriaCliente;
-        this.listaVentas = listaVentas;
+        this.categoriaCliente = categoria;
+        this.compras = new ArrayList<>();
     }
 
     public String getCodigoAfiliacion() {
@@ -20,28 +23,19 @@ public class Cliente extends Persona {
         this.codigoAfiliacion = codigoAfiliacion;
     }
 
-    public CategoriaCliente getCategoriaCliente() {
+    public CategoriaCliente getCategoria() {
         return categoriaCliente;
     }
 
-    public void setCategoriaCliente(CategoriaCliente categoriaCliente) {
-        this.categoriaCliente = categoriaCliente;
+    public void setCategoria(CategoriaCliente categoria) {
+        this.categoriaCliente = categoria;
     }
 
-    public ArrayList<Venta> getListaVentas() {
-        return listaVentas;
+    public double calcularDescuento() {
+        return categoriaCliente.getDescuento();
     }
 
-    public void setListaVentas(ArrayList<Venta> listaVentas) {
-        this.listaVentas = listaVentas;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "codigoAfiliacion='" + codigoAfiliacion + '\'' +
-                ", categoriaCliente=" + categoriaCliente +
-                ", listaVentas=" + listaVentas +
-                '}';
+    public List<Venta> consultarCompras() {
+        return compras;
     }
 }

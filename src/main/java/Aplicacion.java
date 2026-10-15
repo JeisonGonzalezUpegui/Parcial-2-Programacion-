@@ -6,7 +6,7 @@ public class Aplicacion {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Empresa empresa = new Empresa("ModaStyle", "676767", "calle 19 manzana 10", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        Sucursal sucursal= new Sucursal("Centro","6776","calle 20 mazana 30","Armenia",new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+        Sucursal sucursal= new Sucursal("Centro","6776","calle 20 mazana 30","Armenia");
         empresa.getListaSucursales().add(sucursal);
         int opcion;
         do {
@@ -19,7 +19,20 @@ public class Aplicacion {
             System.out.println("2. Agregar Cliente");
             System.out.println("3. Agregar Vendedor");
 
-            System.out.println();
+            System.out.println("---Prenda---");
+            System.out.println("4. Agregar Prenda a una sucursal");
+            System.out.println("5. Buscar prenda en una sucursal");
+
+            System.out.println("---Venta---");
+            System.out.println("6. Registrar Venta");
+
+            System.out.println("---Consultas---");
+            System.out.println("7. Prendas Agotadas");
+            System.out.println("8. Ventas de un vendedor");
+            System.out.println("9. Compras de un cliente");
+            System.out.println("10. Ingresos totales de una sucursal");
+            System.out.println("11. Prenda mas vendida en la empresa");
+
             System.out.println("0. Salir");
 
             System.out.println("Seleccione la opcion: ");
@@ -63,8 +76,7 @@ public class Aplicacion {
                         System.out.println("Categoria invalida");
                         break;
                     }
-                    Prenda prenda = new Prenda(nombre, codigo, marca, precioBase, categoriaPrenda, new ArrayList<>()
-                    );
+                    Prenda prenda = new Prenda(nombre, codigo, marca, precioBase, categoriaPrenda);
                     if (empresa.agregarPrenda(prenda)) {
                         System.out.println("La prenda se agrego exitosamente");
                     } else {
@@ -106,8 +118,7 @@ public class Aplicacion {
                         break;
                     }
 
-                    Cliente cliente= new Cliente(documento, nombreCompleto, correo, telefono, codigoAfiliacion, categoriaCliente,new ArrayList<>()
-                    );
+                    Cliente cliente= new Cliente(documento, nombreCompleto, correo, telefono, codigoAfiliacion, categoriaCliente);
                     if (empresa.agregarCliente(cliente)) {
                         System.out.println("El cliente se agrego exitosamente");
                     } else {
@@ -151,21 +162,80 @@ public class Aplicacion {
                     double salarioBasico = sc.nextDouble();
                     sc.nextLine();
 
-                    Vendedor vendedor = new Vendedor(
-                            documentoVendedor,
-                            nombreCompletoVendedor,
-                            correoVendedor,
-                            telefonoVendedor,
-                            codigoEmpleado,
-                            fechaContratacion,
-                            salarioBasico,
-                            new ArrayList<>()
-                    );
+                    Vendedor vendedor = new Vendedor(documentoVendedor, nombreCompletoVendedor, correoVendedor, telefonoVendedor, codigoEmpleado, fechaContratacion, salarioBasico);
 
                     if (empresa.agregarVendedor(sucursalSeleccionada, vendedor)) {
                         System.out.println("El vendedor se agrego exitosamente");
                     } else {
                         System.out.println("El documento ya existe");
+                    }
+
+                    break;
+                }
+                //corchetes para poder repetir, sino nos falla todo
+                case 4: {
+                    System.out.println("---Agregar prenda a una sucursal---");
+
+                    System.out.println("Codigo de la prenda:");
+                    String codigoPrenda = sc.nextLine();
+
+                    Prenda prendaSeleccionada = empresa.buscarPrenda(codigoPrenda);
+
+                    if (prendaSeleccionada == null) {
+                        System.out.println("La prenda no existe en el catalogo");
+                        break;
+                    }
+
+                    System.out.println("Codigo de la sucursal:");
+                    String codigoSucursal = sc.nextLine();
+
+                    Sucursal sucursalSeleccionada =
+                            empresa.buscarSucursal(codigoSucursal);
+
+                    if (sucursalSeleccionada == null) {
+                        System.out.println("La sucursal no existe");
+                        break;
+                    }
+
+                    System.out.println("Talla: 1.XS 2.S 3.M 4.L 5.XL");
+                    int opcionTalla = sc.nextInt();
+                    sc.nextLine();
+
+                    Talla talla = null;
+
+                    if (opcionTalla == 1) {
+                        talla = Talla.XS;
+                    } else if (opcionTalla == 2) {
+                        talla = Talla.S;
+                    } else if (opcionTalla == 3) {
+                        talla = Talla.M;
+                    } else if (opcionTalla == 4) {
+                        talla = Talla.L;
+                    } else if (opcionTalla == 5) {
+                        talla = Talla.XL;
+                    }
+
+                    if (talla == null) {
+                        System.out.println("Talla invalida");
+                        break;
+                    }
+
+                    System.out.println("Color:");
+                    String color = sc.nextLine();
+
+                    System.out.println("Cantidad:");
+                    int cantidad = sc.nextInt();
+                    sc.nextLine();
+
+                    if (sucursalSeleccionada.registrarExistencia(
+                            prendaSeleccionada, talla, color, cantidad)) {
+
+                        System.out.println("Prenda registrada exitosamente en la sucursal");
+
+                    } else {
+                        System.out.println(
+                                "No se pudo registrar. Verifica la talla, la cantidad y que la combinacion de referencia, talla y color no exista"
+                        );
                     }
 
                     break;
