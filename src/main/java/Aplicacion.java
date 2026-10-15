@@ -7,9 +7,12 @@ public class Aplicacion {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Empresa empresa = new Empresa("ModaStyle", "676767", "calle 19 manzana 10", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        Sucursal sucursal= new Sucursal("Centro","6776","calle 20 mazana 30","Armenia");
-        empresa.getListaSucursales().add(sucursal);
-        int opcion;
+        Sucursal sucursal1= new Sucursal("Centro","6776","calle 20 mazana 30","Armenia");
+        Sucursal sucursal2= new Sucursal("Norte","6777","calle 70 mazana 40","Armenia");
+
+        empresa.getListaSucursales().add(sucursal1);
+        empresa.getListaSucursales().add(sucursal2);
+            int opcion;
         do {
             System.out.println("=====Menú Empresa=====");
 
