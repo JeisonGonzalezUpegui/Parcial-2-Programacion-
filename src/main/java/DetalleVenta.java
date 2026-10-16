@@ -49,6 +49,7 @@ public class DetalleVenta {
         return precioFinal;
     }
 
+
     public double calcularSubtotal() {
         subtotal = precioUnitarioFinal * cantidad;
         return subtotal;
